@@ -1,12 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:instant_api_news_app/json_data/article_model.dart';
 import 'package:instant_api_news_app/screens/news_webview_details.dart';
 import 'package:instant_api_news_app/singleton/shared_prefernces.dart';
 import 'package:instant_api_news_app/widgets/items_in_side_bar_drawer.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
 
 class NewsMainScreen extends StatefulWidget {
   const NewsMainScreen({Key? key});
+
 
   @override
   State<StatefulWidget> createState() {
@@ -27,13 +31,12 @@ class NewsMainScreenState extends State<NewsMainScreen> {
     'Health',
   ];
 
+
   @override
   void initState() {
     super.initState();
-    // if(PreferenceUtils.getString(PrefKeys.newsCountry).isEmpty){
-    //   PreferenceUtils.setString(PrefKeys.newsCountry, 'us');
-    // }
-    getArticlesByCategory(title[2]);
+    initializePreferences();
+
   }
 
   @override
@@ -44,13 +47,20 @@ class NewsMainScreenState extends State<NewsMainScreen> {
         backgroundColor: Colors.indigo[800],
         title: Text(
           '${title[currentIndex]} News',
-          style: const TextStyle(
-            fontSize: 30,
+          style:  TextStyle(
+            fontSize: 25.sp,
             fontWeight: FontWeight.w300,
           ),
         ),
       ),
-      drawer: const ItemsInSideBarDrawer(),
+      drawer: ItemsInSideBarDrawer(
+        onCountryCodeChanged: (selectedCountryCode){
+          getArticlesByCategory(
+              title[currentIndex],
+              countryCode: selectedCountryCode,
+          );
+        },
+      ),
       body: articleCardListView(),
       bottomNavigationBar: categoriesBottomNavigationBar(),
     );
@@ -73,41 +83,41 @@ class NewsMainScreenState extends State<NewsMainScreen> {
             );
           },
           child: Container(
-            margin: const EdgeInsets.all(10),
+            margin:  EdgeInsets.all(10.sp),
             decoration: BoxDecoration(
                 color: Colors.indigo[500],
-                borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(10.sp)),
             child: Column(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
+                  borderRadius:  BorderRadius.only(
+                      topLeft: Radius.circular(15.sp),
+                      topRight: Radius.circular(15.sp)),
                   child: article.urlToImage.isEmpty
-                      ? const Padding(
-                          padding: EdgeInsets.only(top: 20),
+                      ?  Padding(
+                          padding: EdgeInsets.only(top: 20.sp),
                           child: Icon(
                             Icons.image_not_supported_outlined,
-                            size: 50,
+                            size: 50.sp,
                           ),
                         )
                       : Image.network(article.urlToImage),
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.sp,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding:  EdgeInsets.all(10.0.sp),
                   child: Text(
                     article.title,
-                    style: const TextStyle(
-                        fontSize: 21,
+                    style:  TextStyle(
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.w300,
                         color: Colors.white),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.sp,
                 ),
                 // Text('${articles[index]['description']}')
               ],
@@ -158,18 +168,27 @@ class NewsMainScreenState extends State<NewsMainScreen> {
     );
   }
 
-  Future<void> getArticlesByCategory(String category) async {
+  Future<void> getArticlesByCategory(String category,{String? countryCode}) async {
     final response =
-        await dio.get('https://newsapi.org/v2/top-headlines', queryParameters: {
-      'country': PreferenceUtils.getString(PrefKeys.newsCountry),
+        await dio.get(
+            'https://newsapi.org/v2/top-headlines',
+            queryParameters: {
+      'country': countryCode ?? PreferenceUtils.getString(PrefKeys.newsCountry),
       'category': category,
-      'apiKey': '6929a782eeee4868b9bee9e9c6e74f27'
+      'apiKey': '6929a782eeee4868b9bee9e9c6e74f27',
+      'language': context.locale.languageCode,
     });
-    if (response.data != null) {
       final news = NewsResponse.fromJson(response.data);
       articles = news.articles;
-      print('.-.-.-.-.->$articles');
       setState(() {});
+
+  }
+
+  Future<void> initializePreferences() async {
+    await PreferenceUtils.init();
+    if (PreferenceUtils.getString(PrefKeys.newsCountry) == null) {
+      PreferenceUtils.setString(PrefKeys.newsCountry, 'us');
     }
+    getArticlesByCategory(title[2]);
   }
 }

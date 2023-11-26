@@ -1,9 +1,15 @@
 import 'package:country_picker/country_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:instant_api_news_app/singleton/shared_prefernces.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
 
 class ItemsInSideBarDrawer extends StatefulWidget{
-  const ItemsInSideBarDrawer({super.key,});
+  const ItemsInSideBarDrawer({super.key,required this.onCountryCodeChanged});
+
+  final Function(String) onCountryCodeChanged;
+
 
   @override
   State<StatefulWidget> createState() {
@@ -13,6 +19,7 @@ class ItemsInSideBarDrawer extends StatefulWidget{
 }
 
 class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
             width: double.infinity,
             fit: BoxFit.fill,
           ),
-          const SizedBox(height: 20,),
+           SizedBox(height: 20.sp,),
           itemInDrawer(
               icon: Icons.home,
               title: 'Home',
@@ -50,8 +57,10 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
           ),
           itemInDrawer(
               icon: Icons.language,
-              title: 'Language',
-              onTap: () {}
+              title: tr('Language'),
+              onTap: () {
+                showLanguageSelectionDialog(context);
+              }
           ),
           itemInDrawer(
               icon: Icons.invert_colors_on,
@@ -63,11 +72,12 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
     );
   }
 
-  void saveSelectedCountry(String selectedCountryCode) async{
+  Future<void> saveSelectedCountry(String selectedCountryCode) async{
     await PreferenceUtils.setString(PrefKeys.newsCountry, selectedCountryCode,);
     setState(() {});
     print('-----------> ${PreferenceUtils.getString(PrefKeys.newsCountry)}');
     Navigator.pop(context);
+    widget.onCountryCodeChanged(selectedCountryCode);
   }
 
   Widget itemInDrawer({
@@ -78,14 +88,68 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
     return ListTile(
       leading: Icon(
         icon,
-        size: 40,
+        size: 27.sp,
         color: Colors.indigo[800],
       ),
       title: Text(
         title,
-        style:const TextStyle(fontSize: 25,),
+        style: TextStyle(fontSize: 20.sp,),
       ),
       onTap: onTap
+    );
+  }
+
+  void showLanguageSelectionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          content: Text(tr('select_language'),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w600
+            ),
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0),
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  child: Text(
+                    tr('Arabic',),
+                    style: TextStyle(
+                        color: Colors.indigo[800],
+                      fontSize: 19.sp,
+                    ),
+                  ),
+                  onPressed: () {
+                    EasyLocalization.of(context)!.setLocale(const Locale('ar', 'EG'));
+                    Navigator.pop(dialogContext);
+                  },
+                ),
+                TextButton(
+                  child: Text(tr('English'),
+                    style: TextStyle(
+                        color: Colors.indigo[800],
+                      fontSize: 19.sp,
+                    ),
+                  ),
+                  onPressed: () {
+                    EasyLocalization.of(context)!.setLocale(const Locale('en', 'US'));
+                    Navigator.pop(dialogContext);
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 10,)
+          ],
+        );
+      },
     );
   }
   
