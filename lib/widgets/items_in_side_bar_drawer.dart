@@ -130,6 +130,8 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                   ),
                   onPressed: () {
                     EasyLocalization.of(context)!.setLocale(const Locale('ar', 'EG'));
+                    PreferenceUtils.setString(PrefKeys.language, 'ar');
+
                     setState(() { });
                     Navigator.pop(dialogContext);
                   },
@@ -143,6 +145,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                   ),
                   onPressed: () {
                     EasyLocalization.of(context)!.setLocale(const Locale('en', 'US'));
+                    PreferenceUtils.setString(PrefKeys.language, 'en');
                     setState(() { });
                     Navigator.pop(dialogContext);
                   },

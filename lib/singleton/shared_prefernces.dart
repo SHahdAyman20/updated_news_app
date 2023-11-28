@@ -13,7 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 //instead of String key
 
 enum PrefKeys{
-  newsCountry
+  newsCountry,
+  language
 }
 
 

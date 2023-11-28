@@ -176,7 +176,7 @@ class NewsMainScreenState extends State<NewsMainScreen> {
       'country': countryCode ?? PreferenceUtils.getString(PrefKeys.newsCountry),
       'category': category,
       'apiKey': '6929a782eeee4868b9bee9e9c6e74f27',
-      'Language': context.locale.languageCode,
+      'Language': PreferenceUtils.getString(PrefKeys.language),
     });
       final news = NewsResponse.fromJson(response.data);
       articles = news.articles;
