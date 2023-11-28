@@ -1,9 +1,9 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:instant_api_news_app/main.dart';
 import 'package:instant_api_news_app/singleton/shared_prefernces.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 
 class ItemsInSideBarDrawer extends StatefulWidget{
   const ItemsInSideBarDrawer({super.key,required this.onCountryCodeChanged});
@@ -23,6 +23,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
 
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
       child: Column(
         children: [
@@ -35,12 +36,12 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
            SizedBox(height: 20.sp,),
           itemInDrawer(
               icon: Icons.home,
-              title: 'Home',
+              title: tr('Home'),
               onTap: ()=> Navigator.pop(context)
           ),
           itemInDrawer(
               icon: Icons.location_city,
-              title: 'Country',
+              title: tr('Country'),
               onTap: () {
                 showCountryPicker(
                   context: context,
@@ -48,12 +49,10 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                     print('country code: ${country.countryCode.toLowerCase()}');
                     print('Select country: ${country.displayName.toLowerCase()}');
                     saveSelectedCountry(country.countryCode.toLowerCase());
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                 );
-              }
+              },
           ),
           itemInDrawer(
               icon: Icons.language,
@@ -64,8 +63,10 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
           ),
           itemInDrawer(
               icon: Icons.invert_colors_on,
-              title: 'Theme',
-              onTap: () {}
+              title: tr('Theme'),
+              onTap: () {
+                selectThemeDialog(context);
+              }
           ),
         ],
       ),
@@ -129,6 +130,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                   ),
                   onPressed: () {
                     EasyLocalization.of(context)!.setLocale(const Locale('ar', 'EG'));
+                    setState(() { });
                     Navigator.pop(dialogContext);
                   },
                 ),
@@ -141,6 +143,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                   ),
                   onPressed: () {
                     EasyLocalization.of(context)!.setLocale(const Locale('en', 'US'));
+                    setState(() { });
                     Navigator.pop(dialogContext);
                   },
                 ),
@@ -152,5 +155,66 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
       },
     );
   }
+
+ void selectThemeDialog(BuildContext context) {
+   showDialog(
+     context: context,
+     builder: (BuildContext dialogContext) {
+       return AlertDialog(
+         content: Text(tr('Select Theme'),
+           textAlign: TextAlign.center,
+           style: TextStyle(
+               fontSize: 20.sp,
+               fontWeight: FontWeight.w600
+           ),
+         ),
+         shape: const RoundedRectangleBorder(
+           borderRadius: BorderRadius.all(Radius.circular(20.0),
+           ),
+         ),
+         actions: [
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             children: [
+               TextButton(
+                 child: Text(
+                   tr('Dark',),
+                   style: TextStyle(
+                     color: Colors.indigo[800],
+                     fontSize: 19.sp,
+                   ),
+                 ),
+                 onPressed: () {
+                   changeTheme(ThemeData.dark());
+                   Navigator.pop(dialogContext);
+                 },
+               ),
+               TextButton(
+                   child: Text(tr('Light'),
+                   style: TextStyle(
+                     color: Colors.indigo[800],
+                     fontSize: 19.sp,
+                   ),
+                 ),
+                 onPressed: () {
+                   changeTheme(ThemeData.light());
+                   Navigator.pop(dialogContext);
+                 },
+               ),
+             ],
+           ),
+           const SizedBox(height: 10,)
+         ],
+       );
+     },
+   );
+ }
+
+  void changeTheme(ThemeData selectedTheme) {
+    setState(() {
+      MyApp.applyTheme(selectedTheme);
+    });
+  }
+
   
 }

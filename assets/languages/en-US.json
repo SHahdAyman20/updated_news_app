@@ -1,9 +1,22 @@
 {
-  "language": "Language",
+  "Language": "Language",
   "select_language": "Select Language",
   "Arabic": "Arabic",
   "English": "English",
   "Home": "Home",
   "Country": "Country",
-  "Theme": "Theme"
+  "Theme": "Theme",
+  "General News": "General News",
+  "Sports News": "Sports News",
+  "Business News": "Business News",
+  "Tech News": "Tech News",
+  "Health News": "Health News",
+  "Select Theme": "Select Theme",
+  "Dark": "Dark",
+  "Light": "Light",
+  "Business":"Business",
+  "Technology": "Technology",
+  "General": "General",
+  "Sports": "Sports",
+  "Health": "Health"
 }

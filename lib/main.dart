@@ -18,35 +18,45 @@ void main() async {
         ],
         path: 'assets/languages',
         saveLocale: true,
-        child: const MyApp(),
+        child:  MyApp(),
       ),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+    MyApp({Key? key,}) : super(key: key);
 
+    static ThemeData theme = ThemeData.light(); // Default theme
+
+    static void applyTheme(ThemeData selectedTheme) {
+      theme = selectedTheme;
+    }
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return EasyLocalization(
-          path: 'assets/languages', // Add this line
-          supportedLocales: const [
-            Locale('ar', 'EG'),
-            Locale('en', 'US'),
-          ],
-          fallbackLocale: const Locale('en', 'US'),
-          child: MaterialApp(
+        return  MaterialApp(
+          theme: MyApp.theme,
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
-            home:const  NewsMainScreen(),
+            home:EasyLocalization(
+                path: 'assets/languages', // Add this line
+                supportedLocales: const [
+                  Locale('ar', 'EG'),
+                  Locale('en', 'US'),
+                ],
+                child: const  NewsMainScreen()
             ),
-
         );
       },
     );

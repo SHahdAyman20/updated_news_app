@@ -9,7 +9,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 
 class NewsMainScreen extends StatefulWidget {
-  const NewsMainScreen({Key? key});
+  const NewsMainScreen({super.key});
 
 
   @override
@@ -24,11 +24,11 @@ class NewsMainScreenState extends State<NewsMainScreen> {
   final dio = Dio();
 
   final List<String> title = [
-    'Business',
-    'Technology',
-    'General',
-    'Sports',
-    'Health',
+    tr('Business'),
+    tr('Technology'),
+    tr('General'),
+    tr('Sports'),
+    tr('Health'),
   ];
 
 
@@ -46,7 +46,7 @@ class NewsMainScreenState extends State<NewsMainScreen> {
         centerTitle: true,
         backgroundColor: Colors.indigo[800],
         title: Text(
-          '${title[currentIndex]} News',
+          tr(title[currentIndex]),
           style:  TextStyle(
             fontSize: 25.sp,
             fontWeight: FontWeight.w300,
@@ -109,7 +109,7 @@ class NewsMainScreenState extends State<NewsMainScreen> {
                 Padding(
                   padding:  EdgeInsets.all(10.0.sp),
                   child: Text(
-                    article.title,
+                    tr(article.title),
                     style:  TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w300,
@@ -143,26 +143,26 @@ class NewsMainScreenState extends State<NewsMainScreen> {
         });
       },
       iconSize: 24,
-      items: const [
+      items:  [
         BottomNavigationBarItem(
-          icon: Icon(Icons.business),
-          label: 'Business',
+          icon: const Icon(Icons.business),
+          label: tr('Business'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.biotech),
-          label: 'Technology',
+          icon: const Icon(Icons.biotech),
+          label: tr('Technology'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'General',
+          icon: const Icon(Icons.home),
+          label: tr('General'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.sports_basketball),
-          label: 'Sports',
+          icon: const Icon(Icons.sports_basketball),
+          label: tr('Sports'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.healing),
-          label: 'Health',
+          icon: const Icon(Icons.healing),
+          label: tr('Health'),
         ),
       ],
     );
@@ -176,7 +176,7 @@ class NewsMainScreenState extends State<NewsMainScreen> {
       'country': countryCode ?? PreferenceUtils.getString(PrefKeys.newsCountry),
       'category': category,
       'apiKey': '6929a782eeee4868b9bee9e9c6e74f27',
-      'language': context.locale.languageCode,
+      'Language': context.locale.languageCode,
     });
       final news = NewsResponse.fromJson(response.data);
       articles = news.articles;

@@ -1,10 +1,22 @@
 {
-  "language": "اللغة",
+  "Language": "اللغة",
   "select_language": "اختر اللغة",
   "Arabic": "العربية",
   "English": "الإنجليزية",
   "Home": "الصفحة الرئيسية",
   "Country": "البلد",
-  "Theme": "السمة"
-
+  "Theme": "السمة",
+  "General News": "الاخبار العامه",
+  "Sports News": "اخبار الرياضه",
+  "Business News": "اخبار الاعمال",
+  "Tech News": "اخبار التكنولوجيا",
+  "Health News": "اخبار الصحه",
+  "Select Theme": "اختر السمه",
+  "Dark": "فاتح",
+  "Light": "غامق",
+  "Business":"اعمال",
+  "Technology": "تكنولوجيا",
+  "General": "عامة",
+  "Sports": "رياضة",
+  "Health": "صحه"
 }
