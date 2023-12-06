@@ -19,16 +19,17 @@ class NewsMainScreen extends StatefulWidget {
 }
 
 class NewsMainScreenState extends State<NewsMainScreen> {
+
   int currentIndex = 2;
   List<Articles> articles = [];
   final dio = Dio();
 
   final List<String> title = [
-    tr('Business'),
-    tr('Technology'),
-    tr('General'),
-    tr('Sports'),
-    tr('Health'),
+    'Business',
+    'Technology',
+    'General',
+    'Sports',
+    'Health',
   ];
 
 
@@ -61,6 +62,9 @@ class NewsMainScreenState extends State<NewsMainScreen> {
           );
         },
       ),
+      onDrawerChanged: (isOpen){
+        setState(() {});
+      },
       body: articleCardListView(),
       bottomNavigationBar: categoriesBottomNavigationBar(),
     );
@@ -176,7 +180,7 @@ class NewsMainScreenState extends State<NewsMainScreen> {
       'country': countryCode ?? PreferenceUtils.getString(PrefKeys.newsCountry),
       'category': category,
       'apiKey': '6929a782eeee4868b9bee9e9c6e74f27',
-      'Language': PreferenceUtils.getString(PrefKeys.language),
+     // 'Language': PreferenceUtils.getString(PrefKeys.language),
     });
       final news = NewsResponse.fromJson(response.data);
       articles = news.articles;

@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:instant_api_news_app/screens/news_main_screen.dart';
@@ -10,28 +11,24 @@ void main() async {
   // AppDio.init();
 
   runApp(
-    DevicePreview(
-      builder: (context) => EasyLocalization(
-        supportedLocales: const [
-          Locale('ar', 'EG'),
-          Locale('en', 'US'),
-        ],
-        path: 'assets/languages',
-        saveLocale: true,
-        child:  MyApp(),
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('ar', 'EG'),
+        Locale('en', 'US'),
+      ],
+      path: 'assets/languages',
+      saveLocale: true,
+      child:  DevicePreview(
+          builder: (BuildContext context) {
+            return MyApp();
+          },
       ),
     ),
   );
 }
 
 class MyApp extends StatefulWidget {
-    MyApp({Key? key,}) : super(key: key);
-
-    static ThemeData theme = ThemeData.light(); // Default theme
-
-    static void applyTheme(ThemeData selectedTheme) {
-      theme = selectedTheme;
-    }
+    const MyApp({Key? key,}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -42,21 +39,20 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return  MaterialApp(
-          theme: MyApp.theme,
-            locale: DevicePreview.locale(context),
-            builder: DevicePreview.appBuilder,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            home:EasyLocalization(
-                path: 'assets/languages', // Add this line
-                supportedLocales: const [
-                  Locale('ar', 'EG'),
-                  Locale('en', 'US'),
-                ],
-                child: const  NewsMainScreen()
-            ),
+        return  AdaptiveTheme(
+          light: ThemeData.light(useMaterial3: true),
+          dark: ThemeData.dark(useMaterial3: true),
+          initial: AdaptiveThemeMode.light,
+          builder: (theme, darkTheme) {
+            return MaterialApp(
+              locale: context.locale,
+              builder: DevicePreview.appBuilder,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              home:const NewsMainScreen(),
+          );
+          },
         );
       },
     );

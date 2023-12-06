@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -129,9 +130,8 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                     ),
                   ),
                   onPressed: () {
-                    EasyLocalization.of(context)!.setLocale(const Locale('ar', 'EG'));
+                    EasyLocalization.of(context)?.setLocale(const Locale('ar', 'EG'));
                     PreferenceUtils.setString(PrefKeys.language, 'ar');
-
                     setState(() { });
                     Navigator.pop(dialogContext);
                   },
@@ -144,7 +144,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                     ),
                   ),
                   onPressed: () {
-                    EasyLocalization.of(context)!.setLocale(const Locale('en', 'US'));
+                    EasyLocalization.of(context)?.setLocale(const Locale('en', 'US'));
                     PreferenceUtils.setString(PrefKeys.language, 'en');
                     setState(() { });
                     Navigator.pop(dialogContext);
@@ -188,7 +188,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                    ),
                  ),
                  onPressed: () {
-                   changeTheme(ThemeData.dark());
+                   AdaptiveTheme.of(context)?.setDark();
                    Navigator.pop(dialogContext);
                  },
                ),
@@ -200,7 +200,7 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
                    ),
                  ),
                  onPressed: () {
-                   changeTheme(ThemeData.light());
+                   AdaptiveTheme.of(context)?.setLight();
                    Navigator.pop(dialogContext);
                  },
                ),
@@ -213,11 +213,6 @@ class ItemsInSideBarDrawerState extends State<ItemsInSideBarDrawer>{
    );
  }
 
-  void changeTheme(ThemeData selectedTheme) {
-    setState(() {
-      MyApp.applyTheme(selectedTheme);
-    });
-  }
 
   
 }
