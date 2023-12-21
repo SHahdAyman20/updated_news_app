@@ -1,16 +1,16 @@
-# instant_api_news_app
+# Updated News App
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Welcome to the Updated News App project! This Flutter-based app is designed to provide a seamless and personalized news browsing experience. Here are some key features and functionalities:## Responsive Design 🌐📱💻The app is built using the Responsive Sizer package, ensuring the user interface adapts perfectly to any screen size. Whether you're using a mobile device or a desktop computer, the app will look stunning and provide optimal usability.## Category-based Navigation 🗞️🏀⚽With the bottom navigation bar, users can easily explore news articles based on different categories. From business and sports to entertainment and technology, there's a wide range of topics to choose from. Stay up to date with the news that matters to you!## Theme and Language Customization 🌗🌙🔆📜The app bar includes a convenient dropdown menu that allows users to change the app's theme between light and dark modes.
+Additionally, users can switch between Arabic and English languages, providing a localized news experience.## Global News with Country Picker 🌍🌏🌎To cater to a global audience, the app integrates the Country Picker package. Users can select their preferred country and access news specific to that region. Stay informed about local events and developments, no matter where you are!## WebView Integration 📝🔍💻Each news article card includes an interactive icon. Users are seamlessly taken to a dedicated screen that displays the full article using a WebView when clicked. Dive deeper into the stories that captivate you!## Getting StartedTo get started with the project, follow these steps:1. Clone the repository: git clone https://github.com/SHahdAyman20/updated_news_app.git2. Open the project in your preferred Flutter development environment.3. Run the app on an emulator or physical device. Feel free to explore the codebase, customize the app to your liking, and contribute to its development.
+![Screenshot_20231221_211400](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/ef4880af-ca03-4af0-be7b-ceb43dad9a9a)
+![Screenshot_20231221_211349](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/23c62bd2-bb19-46d2-8c2a-04de7f16fc60)
+![Screenshot_20231221_211324](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/3e571774-e363-42b0-9b3c-a6da4b90be19)
+![Screenshot_20231221_211306](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/a7e5d04e-dcf9-4027-8fe6-fca048ae620b)
+![Screenshot_20231221_211247](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/f675ab75-6ef3-4653-a79a-678642cb1169)
+![Screenshot_20231221_211232](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/35866efa-1458-4f0b-a6a0-b4a42ae97221)
+![Screenshot_20231221_211219](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/0db29d4e-1bfc-4747-bc3d-0c504c066439)
+![Screenshot_20231221_211150](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/2e7cc0ff-6219-411a-8961-7678521c5d57)
+![Screenshot_20231221_211050](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/88cd8c04-08d8-4814-b515-6eb77ceb69da)
+![Screenshot_20231221_211000](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/10ac861e-2bd0-4e9d-8cf7-ae828e230d00)
+![Screenshot_20231221_210911](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/749cf078-6d9f-496d-a7c9-626a3ec74936)
+![Screenshot_20231221_210847](https://github.com/SHahdAyman20/updated_news_app/assets/121692567/f987ec54-4457-4f97-a1c2-c8b475069eaf)
