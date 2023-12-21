@@ -29,13 +29,18 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: Colors.white, // <-- SEE HERE
+        ),
         backgroundColor: Colors.indigo[800],
         title: const Text(
           'News Details',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w300,
+            color: Colors.white
           ),
+
         ),
       ),
       body: WebViewWidget(
