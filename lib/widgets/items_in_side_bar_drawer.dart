@@ -2,7 +2,6 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:instant_api_news_app/main.dart';
 import 'package:instant_api_news_app/singleton/shared_prefernces.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

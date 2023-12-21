@@ -20,7 +20,7 @@ void main() async {
       saveLocale: true,
       child:  DevicePreview(
           builder: (BuildContext context) {
-            return MyApp();
+            return const MyApp();
           },
       ),
     ),
@@ -45,6 +45,8 @@ class _MyAppState extends State<MyApp> {
           initial: AdaptiveThemeMode.light,
           builder: (theme, darkTheme) {
             return MaterialApp(
+              theme: theme,
+              darkTheme: darkTheme,
               locale: context.locale,
               builder: DevicePreview.appBuilder,
               debugShowCheckedModeBanner: false,
